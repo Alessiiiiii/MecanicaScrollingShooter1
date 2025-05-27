@@ -1,18 +1,19 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class MoveBlock : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float speed;
-    void Start()
-    {
-        
-    }
+    public float LimitPosY;
+    public float resetPosY; // La posición a la que se reinicia
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        transform.position += Vector3.down * speed * Time.deltaTime;
+
+        // Si llega al límite, lo enviamos a la posición inicial
+        if (transform.position.y <= LimitPosY)
+        {
+            transform.position = new Vector3(transform.position.x, resetPosY, transform.position.z);
+        }
     }
 }
