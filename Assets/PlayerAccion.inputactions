@@ -15,13 +15,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Disparar",
                     "type": "Button",
                     "id": "46e3790b-64b5-4919-916c-b3f69ef57e19",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -87,7 +87,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "Disparar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

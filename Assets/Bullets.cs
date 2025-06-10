@@ -1,22 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Bullet : MonoBehaviour
 {
-   
-    public float bulletSpeed = 50f;
+    // Start is called before the first frame update
+    public int BulletDemage = 10;
 
-    
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.CompareTag("Enemigos"))
+        {
+            collision.gameObject.GetComponent<Enemy>().ChangeHealth(BulletDemage);
+        }
     }
 
-  
-
-
-     void Update()
-    {
-        transform.Translate(Vector3.up*Time.deltaTime*bulletSpeed);
-    }
 }
