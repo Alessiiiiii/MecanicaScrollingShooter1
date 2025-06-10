@@ -3,47 +3,44 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movimiento")]
     public float force = 50f;
     private Rigidbody rb;
-    private PlayerInput playerInput;
     private Vector2 input;
+
+    [Header("Disparo")]
     public GameObject Bala; // Prefab de la bala
     public Transform Spawner; // Lugar desde donde se dispara
     public float velocidadBala = 20f;
-    public InputAction dispararAction;
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        playerInput = GetComponent<PlayerInput>();
     }
 
-    private void OnEnable()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        dispararAction.performed += ctx => Disparar(); // Detecta el disparo correctamente
-        dispararAction.Enable();
+        input = context.ReadValue<Vector2>();
     }
 
-    private void OnDisable()
+    public void OnDisparar(InputAction.CallbackContext context)
     {
-        dispararAction.Disable();
+        if (context.performed)
+        {
+            GameObject bala = Instantiate(Bala, Spawner.position, Spawner.rotation);
+            Rigidbody rbBala = bala.GetComponent<Rigidbody>();
+            rbBala.linearVelocity = Vector3.up * velocidadBala;
+            Destroy(bala, 3f); // La bala se autodestruye tras 3 segundos
+
+
+            Debug.Log("¡Disparo!");
+        }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        input = playerInput.actions["Move"].ReadValue<Vector2>(); // Leer input del movimiento
-    }
-
-    void Disparar()
-    {
-        GameObject bala = Instantiate(Bala, Spawner.position, Quaternion.identity);
-        bala.GetComponent<Rigidbody>().linearVelocity = Vector3.up * velocidadBala; // Movimiento de la bala
-        Debug.Log("¡Disparo realizado!");
-    }
-
-    public void FixedUpdate()
-    {
-        rb.AddForce(new Vector2(input.x, input.y) * force); // Movimiento del jugador
+        Vector3 direccion = new Vector3(input.x, input.y, 0f); // Movimiento en X/Y
+        rb.AddForce(direccion * force);
     }
 }

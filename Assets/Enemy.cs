@@ -7,6 +7,14 @@ public class Enemy : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bala")) // Verifica que sea una bala
+        {
+            ChangeHealth(-1); // Resta vida al enemigo
+            Destroy(other.gameObject); // Destruye la bala al impactar
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
