@@ -8,6 +8,8 @@ public class EnemySpawner : MonoBehaviour
     public float minSpawnInterval = 1f; // Tiempo mínimo entre spawns
     public float spawnDecreaseRate = 0.1f; // Reducción del tiempo de spawn
     private int enemigosKilled = 0; // Contador de enemigos eliminados
+    public Vector2 spawnRangeX; // Rango de spawn en X
+    public Vector2 spawnRangeZ; // Rango de spawn en Z
 
     void Start()
     {

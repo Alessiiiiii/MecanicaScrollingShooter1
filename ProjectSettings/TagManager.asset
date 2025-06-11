@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemigos
   - Base
+  - Bala
+  - Item
   layers:
   - Default
   - TransparentFX

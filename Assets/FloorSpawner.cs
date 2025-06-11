@@ -4,7 +4,7 @@ public class FloorSpawner : MonoBehaviour
 {
     public GameObject Base;  // Prefab del piso
     public Transform spawnPoint;  // Lugar donde se generará el piso
-    public float spawnInterval = 5f;  // Cada cuánto tiempo se genera un nuevo piso
+    public float spawnInterval = 10f;  // Cada cuánto tiempo se genera un nuevo piso
 
     void Start()
     {

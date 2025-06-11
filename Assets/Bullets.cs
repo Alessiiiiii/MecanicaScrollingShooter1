@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemigos"))
         {
-            collision.gameObject.GetComponent<Enemy>().ChangeHealth(BulletDemage);
+            collision.gameObject.GetComponent<EnemyMovement>().ChangeHealth(BulletDemage);
         }
     }
 

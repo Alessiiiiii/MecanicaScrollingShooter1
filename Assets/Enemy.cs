@@ -1,30 +1,37 @@
-using System;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
-    internal void ChangeHealth(int bulletDemage)
-    {
-        throw new NotImplementedException();
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Bala")) // Verifica que sea una bala
-        {
-            ChangeHealth(-1); // Resta vida al enemigo
-            Destroy(other.gameObject); // Destruye la bala al impactar
-        }
-    }
+    public float speed = 3f;  // Velocidad configurable en el Inspector
+    public float range = 5f;  // Distancia máxima de movimiento lateral
+    public int health = 10; // Variable de vida del enemigo
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector3 startPosition;
+    private int direction = 1; // Dirección inicial (1 = derecha, -1 = izquierda)
+
     void Start()
     {
-        
+        startPosition = transform.position; // Guarda la posición inicial
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // Mueve al enemigo lateralmente
+        transform.position += Vector3.right * direction * speed * Time.deltaTime;
+
+        // Cambia la dirección si alcanza el límite
+        if (Mathf.Abs(transform.position.x - startPosition.x) >= range)
+        {
+            direction *= -1; // Invierte la dirección
+        }
+
+    }
+    public void ChangeHealth(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
