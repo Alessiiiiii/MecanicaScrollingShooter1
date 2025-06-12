@@ -910,6 +910,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4388063611836051347, guid: 3322c842c425b864ea8eb933bff766ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2013565843}
+    - targetCorrespondingSourceObject: {fileID: 4388063611836051347, guid: 3322c842c425b864ea8eb933bff766ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2013565846}
   m_SourcePrefab: {fileID: 100100000, guid: 3322c842c425b864ea8eb933bff766ca, type: 3}
 --- !u!1 &420549483 stripped
 GameObject:
@@ -1057,6 +1060,7 @@ MonoBehaviour:
   speed: 4
   range: 5
   health: 10
+  spawner: {fileID: 0}
 --- !u!136 &498916890
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3061,6 +3065,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &2013565846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013565839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7920d9253852246439b614517d3da074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  range: 10
+  health: 10
+  spawner: {fileID: 0}
 --- !u!1001 &2017007672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3165,6 +3185,7 @@ MonoBehaviour:
   speed: 3
   range: 5
   health: 10
+  spawner: {fileID: 0}
 --- !u!54 &2033737791
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3427,6 +3448,7 @@ MonoBehaviour:
   speed: 2
   range: 5
   health: 10
+  spawner: {fileID: 0}
 --- !u!54 &2061167973
 Rigidbody:
   m_ObjectHideFlags: 0
