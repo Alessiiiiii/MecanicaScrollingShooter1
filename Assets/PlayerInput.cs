@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movimiento")]
-    public float force = 50f;
+    public float force = 70f;
     private Rigidbody rb;
     private Vector2 input;
 
     [Header("Disparo")]
     public GameObject Bala; // Prefab de la bala
     public Transform Spawner; // Lugar desde donde se dispara
-    public float velocidadBala = 20f;
+    public float velocidadBala = 30f;
     public int collectedItems;
 
     public TMPro.TextMeshProUGUI scoreText;
@@ -61,14 +61,13 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Choque cotra : " + collision.gameObject.name);
-
-       
+               
 
         if (collision.gameObject.CompareTag("Enemigos"))
         {
+            
             Debug.Log(GameOverText);
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
         if (collision.gameObject.CompareTag("Goal"))
         {
@@ -106,7 +105,9 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Enemigos"))
         {
+           
             GameOverText.enabled = true;
+            
         }
     }
     private void OnTriggerExit(Collider other)

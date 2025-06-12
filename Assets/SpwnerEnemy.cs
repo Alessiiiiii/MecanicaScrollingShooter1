@@ -2,34 +2,39 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemigos; // Array de enemigos
-    public GameObject bossEnemy; // Jefe final
-    public float spawnInterval = 3f; // Tiempo inicial entre spawns
-    public float minSpawnInterval = 1f; // Tiempo mínimo entre spawns
-    public float spawnDecreaseRate = 0.1f; // Reducción del tiempo de spawn
-    private int enemigosKilled = 0; // Contador de enemigos eliminados
-    public Vector2 spawnRangeX; // Rango de spawn en X
-    public Vector2 spawnRangeZ; // Rango de spawn en Z
+    public GameObject[] enemigos;
+    public GameObject bossEnemy;
+    public float spawnInterval = 6f;
+    public float minSpawnInterval = 3f;
+    public float spawnDecreaseRate = 0.01f;
+    public int enemigosKilled = 0; // Contador de enemigos eliminados
+    public static EnemySpawner instance; // Permite acceso global al spawner
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 2f, spawnInterval);
+        InvokeRepeating("SpawnEnemy", 6f, spawnInterval);
     }
 
     void SpawnEnemy()
     {
-        if (enemigosKilled >= 6) // Si se han eliminado 6 enemigos, aparece el jefe
+        if (enemigosKilled >= 10) // Cambié a 10 eliminaciones para que aparezca el jefe
         {
             Instantiate(bossEnemy, transform.position, Quaternion.identity);
-            CancelInvoke("SpawnEnemy"); // Detiene el spawn de enemigos normales
+            CancelInvoke("SpawnEnemy");
             return;
         }
 
-        // Generar un enemigo aleatorio
         int index = Random.Range(0, enemigos.Length);
-        Instantiate(enemigos[index], transform.position, Quaternion.identity);
+        GameObject enemy = Instantiate(enemigos[index], transform.position, Quaternion.identity);
 
-        // Reducir el tiempo de spawn progresivamente
+        // Asigna el script de referencia al enemigo (debe tener un script de muerte)
+        enemy.GetComponent<EnemyMovement>().spawner = this;
+
         spawnInterval = Mathf.Max(spawnInterval - spawnDecreaseRate, minSpawnInterval);
         CancelInvoke("SpawnEnemy");
         InvokeRepeating("SpawnEnemy", spawnInterval, spawnInterval);
