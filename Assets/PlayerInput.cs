@@ -12,26 +12,28 @@ public class PlayerController : MonoBehaviour
     [Header("Disparo")]
     public GameObject Bala; // Prefab de la bala
     public Transform Spawner; // Lugar desde donde se dispara
-    public float velocidadBala = 30f;
+    public float velocidadBala = 60f;
     public int collectedItems;
+   
+
+
 
     public TMPro.TextMeshProUGUI scoreText;
     
-    public TMPro.TextMeshProUGUI WinText;
     public TMPro.TextMeshProUGUI GameOverText;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        WinText.enabled = false;
+
         GameOverText.enabled = false;
     }
     void Start()
     {
-       
-        
-        
+
+
+
 
     }
 
@@ -61,21 +63,15 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-               
+
 
         if (collision.gameObject.CompareTag("Enemigos"))
         {
-            
+
             Debug.Log(GameOverText);
             SceneManager.LoadScene(0);
         }
-        if (collision.gameObject.CompareTag("Goal"))
-        {
 
-            Destroy(collision.gameObject);
-            Debug.Log(WinText);
-            SceneManager.LoadScene(2);
-        }
 
         if (collision.gameObject.CompareTag("Item"))
         {
@@ -97,29 +93,19 @@ public class PlayerController : MonoBehaviour
             collectedItems++;
             scoreText.text = collectedItems.ToString();
         }
-        
-        if (other.gameObject.CompareTag("Goal"))
-        {
-            WinText.enabled = true;
-            SceneManager.LoadScene(2);
-        }
+
+
         if (other.gameObject.CompareTag("Enemigos"))
         {
-           
+
             GameOverText.enabled = true;
-            
+
         }
+
+
+
+
     }
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Trigger Exit:" + other.gameObject.name);
-
-
-        
-    }
-    
-
-
 }
 
-    
+
